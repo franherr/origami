@@ -3,6 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 
+#---------------------------------------------------------------------------------------------
+# Global variables and setup
+#---------------------------------------------------------------------------------------------
+
+#rounds values up to 4 decimal places to avoid computation errors.
 SIGFIGS = 4
 
 tau = 1/3
@@ -128,6 +133,10 @@ B[6][1][0] = 1
 B[6][1][1] = 0
 B[6][2][0] = 3/4 - (alpha*mu)
 B[6][2][1] = (alpha-mu)/2
+
+#---------------------------------------------------------------------------------------------
+# functions for plotting and computing things
+#---------------------------------------------------------------------------------------------
 
 def plotAtriangles(graph):
     for i in range(0,7):
@@ -312,6 +321,10 @@ def divideSegment(seg):
             #  print('found segment intersection with triangle ' + str(i) + ': ' + str(intersections))
     return newSegments
 
+#-------------------------------------------------------------------------------------
+# functions for iterating preimages and plotting them
+#-------------------------------------------------------------------------------------
+
 def iteratePreimages(n):
     initialSegments = [[[0,0],[1,0]]]
     for i in range(0,n):
@@ -334,6 +347,9 @@ def plotPreimages(n, graph):
     for seg in preimageSegments:
         plotSegment(graph, seg)
 
+#---------------------------------------------------------------------------------------------
+# graphics setup, testing, and plotting
+#---------------------------------------------------------------------------------------------
 
 fig, axes = plt.subplots(1, 2)
 
@@ -341,58 +357,8 @@ axes[0].set_aspect('equal')
 axes[1].set_aspect('equal')
 plotAtriangles(axes[0])
 plotBtriangles(axes[1])
-# plotAtriangles(axes[1])
-# plotBtriangles(axes[2])
-
-# print('triangle B[3] vertices: ' + str(B[3]))
-# print('triangle B[4] vertices: ' + str(B[4]))
 
 plotSegment(axes[1], [[0,0],[1,0]])
 plotPreimages(10, axes[0])
-
-# seg = [[0.25, 0.14433757], [0.33333333, 0.19245009]]
-# plotSegment(axes[1], seg)
-# divisions = divideSegment(seg)
-# print(divisions)
-
-# preimages = iteratePreimages(1)
-# print(preimages[1][0])
-# for i in range(0,6):
-#     inside = pointInTriangle(preimages[1][0], B[i])
-#     if inside :
-#         print('point is inside triangle ' + str(i))
-# # division = divideSegment(preimages[1])
-# axes[1].plot([preimages[1][0][0], preimages[1][1][0]], [preimages[1][0][1], preimages[1][1][1]], 'g-')
-# # print(division)
-
-# seg = np.zeros((2,2))
-# seg[1][0] = 1
-# seg[1][1] = 1
-# p1 = seg[0]
-# p2 = seg[1]
-# axes[1].plot([p1[0], p2[0]], [p1[1], p2[1]], 'b-')
-# axes[1].text(p1[0], p1[1], str('p1'), fontsize=10)
-# axes[1].text(p2[0], p2[1], str('p2'), fontsize=10)
-
-
-
-#find all subdivided segments
-# initialSegments = [[[0,0],[1,0]]]
-# subdividedSegments = []
-# for seg in initialSegments:
-#     divisions = divideSegment(seg)
-#     subdividedSegments += divisions
-# print('number of subdivided segements: ' + str(len(subdividedSegments)))
-# print(subdividedSegments)
-
-
-
-# q1 = unrotated_triangle_map(A[1], B[1], p1)
-# q2 = unrotated_triangle_map(A[1], B[1], p2)
-# axes[1].plot([q1[0], q2[0]], [q1[1], q2[1]], 'b-')
-# axes[1].text(q1[0], q1[1], str('q1'), fontsize=10)
-# axes[1].text(q2[0], q2[1], str('q2'), fontsize=10)
-
-
 
 plt.show()
