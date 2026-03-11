@@ -359,6 +359,6 @@ plotAtriangles(axes[0])
 plotBtriangles(axes[1])
 
 plotSegment(axes[1], [[0,0],[1,0]])
-plotPreimages(10, axes[0])
+plotPreimages(12, axes[0])
 
 plt.show()
